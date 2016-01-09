@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %5p [%c] %m%n" />
+        </Console>
+<!--
+        <File name="file" fileName="C:/java_environment/LOG/study_maven.log" append="false">
+   			<PatternLayout pattern="%d %5p [%c] %m%n"/>
+  		</File>
+-->
+		<RollingFile name="file" fileName="d:/dev/LOG/test_maven.log" filePattern="d:/dev/LOG/test_maven.log.%d{yyyy-MM-dd}">
+			<PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10MB" /> <!-- 이 용량이 초과되면 아래 DefaultRolloverStrategy 정책만큼 넘버링 할거다. -->
+			</Policies>
+			<DefaultRolloverStrategy max="10" fileIndex="min" /><!-- 0부터 1000개 까지만 만들거다 1000개 초과되면 파일이 더생성안된다. --> 
+		</RollingFile>
+
+		<RollingFile name="file2" fileName="d:/dev/LOG/test_maven2.log" filePattern="d:/dev/LOG/test_maven2.log.%d{yyyy-MM-dd}">
+			<PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="10MB" /> <!-- 이 용량이 초과되면 아래 DefaultRolloverStrategy 정책만큼 넘버링 할거다. -->
+			</Policies>
+			<DefaultRolloverStrategy max="10" fileIndex="min" /><!-- 0부터 1000개 까지만 만들거다 1000개 초과되면 파일이 더생성안된다. --> 
+		</RollingFile>
+
+
+    </Appenders>
+    <Loggers>
+        <Logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file"/>
+            <AppenderRef ref="file2"/>
+        </Logger>
+        <Logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file"/>
+            <AppenderRef ref="file2"/>
+        </Logger>
+        <Logger name="org.apache" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file"/>
+            <AppenderRef ref="file2"/>
+        </Logger>
+        <Root level="DEBUG">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file"/>
+            <AppenderRef ref="file2"/>
+        </Root>
+    </Loggers>
+
+</Configuration>
